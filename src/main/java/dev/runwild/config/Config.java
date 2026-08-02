@@ -47,9 +47,13 @@ public record Config(
             throw new IllegalArgumentException("forecastDays must be 1..7");
     }
 
-    /** Placeholder location — override in runwild.properties. */
+    /**
+     * Home. Used when no {@code runwild.properties} is present, so the jar produces a
+     * real recommendation on first run with no setup at all — override it for your own
+     * location.
+     */
     public static Config defaults() {
-        return new Config("Denver, CO", 39.7392, -104.9903,
+        return new Config("Grand Junction, CO", 39.0639, -108.5506,
                 40.0, 65.0, 1.0, 1, 2, true);
     }
 

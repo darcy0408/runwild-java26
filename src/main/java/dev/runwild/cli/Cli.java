@@ -36,10 +36,12 @@ public final class Cli {
 
     private static void renderAlerts(Plan plan) {
         for (Alert alert : plan.alerts()) {
-            if (!alert.isSerious()) continue;
-            System.out.println("  " + color("31", "⚠ " + alert.event()) + " — " + alert.headline());
-            System.out.println();
+            String mark = alert.isSerious() ? "⚠ " : "ⓘ ";
+            String tint = alert.isSerious() ? "31" : "33";
+            System.out.println("  " + color(tint, mark + alert.event())
+                    + dim(" (" + alert.severity() + ")") + " — " + shorten(alert.headline(), 90));
         }
+        if (!plan.alerts().isEmpty()) System.out.println();
     }
 
     private static void renderVerdict(Plan plan) {
@@ -126,7 +128,11 @@ public final class Cli {
     }
 
     private static String shorten(String text) {
-        return text.length() <= 46 ? text : text.substring(0, 45) + "…";
+        return shorten(text, 46);
+    }
+
+    private static String shorten(String text, int max) {
+        return text.length() <= max ? text : text.substring(0, max - 1) + "…";
     }
 
     private static String color(String code, String text) {

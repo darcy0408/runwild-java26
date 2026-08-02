@@ -65,7 +65,8 @@ public final class PlanService {
         var notes = new java.util.ArrayList<String>();
         if (hours.stream().allMatch(hour -> hour.totalPollen() == null)) {
             notes.add("No pollen forecast covers this location, so pollen is excluded "
-                    + "from the score. Ozone and PM2.5 are used instead.");
+                    + "from the score. Ground-level ozone and the US air-quality index "
+                    + "are scored instead.");
         }
         if (hours.stream().allMatch(hour -> hour.usAqi() == null)) {
             notes.add("No air-quality index available for this location.");

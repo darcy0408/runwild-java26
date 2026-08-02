@@ -26,6 +26,7 @@ public final class Main {
             case "--version" -> printVersion();
             case "--h3-demo" -> Http.demo();
             case "--plan" -> plan();
+            case "--serve" -> serve(args);
             case "--benchmark" -> benchmark();
             case "--help", "-h" -> printHelp();
             default -> {
@@ -46,6 +47,12 @@ public final class Main {
             System.err.println("  air-quality services. Check your connection and try again.");
             System.exit(1);
         }
+    }
+
+    private static void serve(String[] args) throws Exception {
+        int port = args.length > 1 ? Integer.parseInt(args[1]) : 8080;
+        new dev.runwild.web.WebServer(port).start();
+        Thread.currentThread().join();   // the server runs on its own threads
     }
 
     /**

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Declared before render so the browser themes the canvas and scrollbars immediately. -->
+  <meta name="color-scheme" content="light dark">
+  <title>RunWild — should I run outside?</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>🏃</text></svg>">
+</head>
+<body>
+  <a href="#content" class="skip-link visually-hidden">Skip to content</a>
+
+  <header class="page-header">
+    <h1>RunWild</h1>
+    <p class="tagline">Should I run outside?</p>
+    <p id="place" class="place"></p>
+  </header>
+
+  <main id="content" tabindex="-1">
+
+    <!-- The answer. aria-live so the verdict is announced when settings change. -->
+    <section class="verdict" aria-labelledby="verdict-heading">
+      <h2 id="verdict-heading" class="visually-hidden">Recommendation</h2>
+      <div id="verdict" aria-live="polite" aria-busy="true">
+        <p class="loading">Checking the weather, the air and the alerts…</p>
+      </div>
+    </section>
+
+    <div id="alerts" class="alerts" hidden></div>
+
+    <section aria-labelledby="windows-heading">
+      <h2 id="windows-heading">Best windows</h2>
+      <ol id="windows" class="windows" role="list"></ol>
+    </section>
+
+    <section aria-labelledby="hours-heading">
+      <h2 id="hours-heading">Hour by hour</h2>
+      <p class="hint">Select an hour to see exactly what is costing it points.</p>
+      <div class="table-scroll">
+        <table id="hours-table">
+          <caption class="visually-hidden">
+            Runnability score out of 100 for each upcoming hour, with the main limiting factor
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">Hour</th>
+              <th scope="col">Score</th>
+              <th scope="col">Rating</th>
+              <th scope="col">Main factor</th>
+            </tr>
+          </thead>
+          <tbody id="hours-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="breakdown-section" aria-labelledby="breakdown-heading" hidden>
+      <h2 id="breakdown-heading">Score breakdown</h2>
+      <div id="breakdown" aria-live="polite"></div>
+    </section>
+
+    <section aria-labelledby="settings-heading">
+      <h2 id="settings-heading">Your tolerances</h2>
+      <p class="hint">
+        The same forecast should not give the same answer to everyone. Adjust these and
+        the recommendation changes.
+      </p>
+      <form id="settings" class="settings">
+        <div class="field">
+          <label for="tempMin">Coldest you enjoy (°F)</label>
+          <input type="number" id="tempMin" name="tempMin" value="40" min="-40" max="120" step="1">
+        </div>
+        <div class="field">
+          <label for="tempMax">Warmest you enjoy (°F)</label>
+          <input type="number" id="tempMax" name="tempMax" value="65" min="-40" max="130" step="1">
+        </div>
+        <div class="field">
+          <label for="pollen">Pollen sensitivity</label>
+          <input type="range" id="pollen" name="pollen" value="1" min="0" max="2" step="0.5"
+                 aria-describedby="pollen-value">
+          <output id="pollen-value" for="pollen">Typical</output>
+        </div>
+        <div class="field">
+          <label for="duration">Run length (hours)</label>
+          <input type="number" id="duration" name="duration" value="1" min="1" max="6" step="1">
+        </div>
+        <div class="field field--check">
+          <input type="checkbox" id="dark" name="dark" checked>
+          <label for="dark">Avoid running in the dark</label>
+        </div>
+        <button type="submit">Update recommendation</button>
+      </form>
+    </section>
+
+  </main>
+
+  <footer class="page-footer">
+    <p id="coverage" class="coverage"></p>
+    <p id="telemetry" class="telemetry"></p>
+    <p class="colophon">
+      Java 26 · HTTP/3 · structured concurrency · no API keys · runs entirely on your machine
+    </p>
+  </footer>
+
+  <script src="/app.js"></script>
+</body>
+</html>

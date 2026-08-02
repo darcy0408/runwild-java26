@@ -29,10 +29,18 @@ public record Score(int value, List<Advisory> advisories, List<Penalty> penaltie
         return Verdict.of(value);
     }
 
-    /** The single most important thing to tell the user about this hour. */
+    /**
+     * The single most important thing to tell the user about this hour.
+     *
+     * <p>Coverage gaps are skipped here: "no pollen data for this location" is true, but
+     * it is a fact about the location rather than about this hour, and as the headline on
+     * an otherwise perfect hour it reads like a problem. It is reported once, separately.
+     */
     public String headline() {
-        return advisories.isEmpty()
-                ? "Nothing standing in your way."
-                : Advisory.humanize(advisories.getFirst());
+        return advisories.stream()
+                .filter(advisory -> !(advisory instanceof Advisory.Unknown))
+                .findFirst()
+                .map(Advisory::humanize)
+                .orElse("Nothing standing in your way.");
     }
 }
