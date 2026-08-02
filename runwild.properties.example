@@ -1,0 +1,32 @@
+# RunWild configuration — copy to runwild.properties and edit.
+# Every value here is a personal preference, not a universal constant: the same
+# forecast should give a different answer to a runner with hay fever than to one
+# without, and that is the point of the tool.
+
+# Where you run. Find coordinates at https://www.latlong.net
+location.name      = Denver, CO
+location.latitude  = 39.7392
+location.longitude = -104.9903
+
+# The band you actually enjoy running in, in °F, measured as "feels like"
+# (apparent temperature) rather than the raw thermometer reading.
+ideal.temp.min.f   = 40
+ideal.temp.max.f   = 65
+
+# 0.0 = pollen does not affect me at all
+# 1.0 = typical
+# 2.0 = severe hay fever
+# Note: the upstream pollen model covers Europe only. At US locations pollen is
+# reported as unavailable and excluded from the score rather than assumed to be zero.
+pollen.sensitivity = 1.0
+
+# How long you run, in whole hours. Drives the best-window search: RunWild ranks
+# contiguous blocks of this length, not individual hours.
+run.duration.hours = 1
+
+# How far ahead to plan (1-7 days).
+forecast.days      = 2
+
+# Whether to penalise hours between sunset and sunrise. Set false if you are happy
+# running in the dark with a headlamp.
+avoid.darkness     = true
