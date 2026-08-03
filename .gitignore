@@ -1,7 +1,9 @@
 target/
 *.class
 *.aot
+*.aot.config
 .idea/
 *.iml
 .vscode/
 cache/
+docs/*.tmp
