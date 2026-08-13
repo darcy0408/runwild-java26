@@ -75,12 +75,9 @@ There is also a browser dashboard at `http://localhost:8080` with the verdict, t
 windows, an hour-by-hour table, a per-hour score breakdown, and live controls for your
 tolerances.
 
-<!--
-  TODO before submitting: add these three images to docs/ and uncomment.
-  ![Dashboard, light theme](docs/dashboard-light.png)
-  ![Dashboard, dark theme](docs/dashboard-dark.png)
-  ![Tests passing](docs/tests.png)
--->
+![Dashboard, light theme](docs/dashboard-light.png)
+
+![Dashboard, dark theme](docs/dashboard-dark.png)
 
 ## Architecture
 
