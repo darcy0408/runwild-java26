@@ -1,7 +1,8 @@
 # RunWild — should I run outside?
 
 **A running advisor built on Java 26.** It answers the one question runners actually ask
-every morning, using four data sources nobody checks all of, and scores every hour of the
+every morning, combining weather, air-quality, ozone and severe-weather data from three
+live sources, and scores every hour of the
 next two days against *your* tolerances rather than a generic comfort index.
 
 > Built for the [Hackster.io **Modern Java in the Wild**](https://www.hackster.io/contests/modern-java-in-the-wild)
@@ -23,8 +24,9 @@ next two days against *your* tolerances rather than a generic comfort index.
   the back of your throat
 - **Severe weather alerts** — 72°F and clear is still no time to run under a tornado warning
 
-They live in four different apps, and nobody checks all four. RunWild fetches them
-**concurrently over HTTP/3**, scores every hour, and tells you the single best window —
+They live in four different apps, and nobody checks all four. RunWild fetches the three
+upstream sources **concurrently**, attempting HTTP/3 on every request and reporting the
+protocol it actually negotiated, scores every hour, and tells you the single best window —
 and exactly why the other hours lost points.
 
 ## What it looks like
